@@ -1,0 +1,3 @@
+{
+    "redefinable-internals": ["sleep", "defined", "function_exists", "uniqid", "time"]
+}
