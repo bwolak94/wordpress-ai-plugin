@@ -1,0 +1,5 @@
+.page { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+.header { margin-bottom: 1.5rem; }
+.title { font-size: 1.5rem; font-weight: 700; margin: 0 0 0.25rem; }
+.subtitle { color: var(--color-muted, #6b7280); margin: 0; font-size: 0.9rem; }
+.main { display: flex; flex-direction: column; }

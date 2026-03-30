@@ -26,7 +26,7 @@ final class AdminPageTest extends TestCase
         parent::tearDown();
     }
 
-    public function testRegisterAddsMenuAndEnqueueHooks(): void
+    public function testRegisterAddsMenuPageAndEnqueueHook(): void
     {
         $hooks = [];
         Functions\when('add_action')->alias(
@@ -35,9 +35,15 @@ final class AdminPageTest extends TestCase
             }
         );
 
+        $menuPageCalled = false;
+        Functions\when('add_menu_page')->alias(function () use (&$menuPageCalled): string {
+            $menuPageCalled = true;
+            return 'hook_suffix';
+        });
+
         $this->adminPage->register();
 
-        $this->assertContains('admin_menu', $hooks);
+        $this->assertTrue($menuPageCalled, 'register() should call addMenuPage() directly');
         $this->assertContains('admin_enqueue_scripts', $hooks);
     }
 

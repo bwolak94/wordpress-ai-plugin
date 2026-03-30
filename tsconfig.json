@@ -12,7 +12,8 @@
     "paths": {
       "@/*": ["assets/src/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["vitest/globals"]
   },
   "include": ["assets/src"],
   "exclude": ["node_modules", "assets/build"]

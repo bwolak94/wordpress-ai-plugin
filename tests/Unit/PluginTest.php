@@ -102,10 +102,16 @@ final class PluginTest extends TestCase
             }
         );
 
+        $menuPageCalled = false;
+        Functions\when('add_menu_page')->alias(function () use (&$menuPageCalled): string {
+            $menuPageCalled = true;
+            return 'hook_suffix';
+        });
+
         $plugin = new Plugin();
         $plugin->registerAdmin();
 
-        $this->assertContains('admin_menu', $hooks);
+        $this->assertTrue($menuPageCalled);
         $this->assertContains('admin_enqueue_scripts', $hooks);
     }
 

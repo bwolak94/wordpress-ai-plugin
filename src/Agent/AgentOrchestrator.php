@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace WpAiAgent\Agent;
 
 use WpAiAgent\AI\Contracts\AIProviderInterface;
+use WpAiAgent\Agent\ConversationHistory;
 use WpAiAgent\Tools\ToolRegistry;
 use WpAiAgent\DTO\Brief;
 use WpAiAgent\DTO\AgentResult;
@@ -35,18 +36,18 @@ PROMPT;
 
     public function run(Brief $brief): AgentResult
     {
-        $messages = $this->buildInitialMessages($brief);
-        $log      = [];
-        $pages    = [];
-        $rounds   = 0;
+        $history = $this->buildInitialHistory($brief);
+        $log     = [];
+        $pages   = [];
+        $rounds  = 0;
 
         while ($rounds < self::MAX_ROUNDS) {
             $rounds++;
-            $response   = $this->ai->sendMessage($messages, $this->registry->getDefinitions());
+            $response   = $this->ai->sendMessage($history->toArray(), $this->registry->getDefinitions());
             $stopReason = $response['stop_reason'];
             $content    = $response['content'];
 
-            $messages[] = ['role' => 'assistant', 'content' => $content];
+            $history = $history->addAssistantMessage($content);
 
             if ($stopReason === 'end_turn') {
                 break;
@@ -78,7 +79,7 @@ PROMPT;
                 ];
             }
 
-            $messages[] = ['role' => 'user', 'content' => $toolResults];
+            $history = $history->addUserMessage($toolResults);
         }
 
         $agentResult = new AgentResult(
@@ -93,7 +94,7 @@ PROMPT;
         return $agentResult;
     }
 
-    private function buildInitialMessages(Brief $brief): array
+    private function buildInitialHistory(Brief $brief): ConversationHistory
     {
         $userContent = implode("\n\n", array_filter([
             "## Product Documentation",
@@ -108,8 +109,7 @@ PROMPT;
                 : null,
         ]));
 
-        return [
-            ['role' => 'user', 'content' => self::SYSTEM_PROMPT . "\n\n" . $userContent],
-        ];
+        return ConversationHistory::create()
+            ->addUserMessage(self::SYSTEM_PROMPT . "\n\n" . $userContent);
     }
 }

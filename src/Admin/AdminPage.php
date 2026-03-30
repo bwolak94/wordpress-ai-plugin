@@ -8,7 +8,7 @@ final class AdminPage
 {
     public function register(): void
     {
-        add_action('admin_menu', [$this, 'addMenuPage']);
+        $this->addMenuPage();
         add_action('admin_enqueue_scripts', [$this, 'enqueueAssets']);
     }
 
@@ -48,7 +48,7 @@ final class AdminPage
             );
         } else {
             $manifest = json_decode(file_get_contents($manifestPath), true);
-            $entry = $manifest['src/main.tsx'] ?? null;
+            $entry = $manifest['assets/src/main.tsx'] ?? $manifest['src/main.tsx'] ?? null;
 
             if (!$entry) {
                 return;
@@ -56,7 +56,7 @@ final class AdminPage
 
             wp_enqueue_script(
                 'wp-ai-agent',
-                plugin_dir_url(WP_AI_AGENT_DIR . 'assets/build/') . $entry['file'],
+                plugins_url('assets/build/' . $entry['file'], WP_AI_AGENT_DIR . 'wp-ai-page-builder.php'),
                 [],
                 WP_AI_AGENT_VERSION,
                 true,
@@ -65,7 +65,7 @@ final class AdminPage
             foreach ($entry['css'] ?? [] as $cssFile) {
                 wp_enqueue_style(
                     'wp-ai-agent-' . md5($cssFile),
-                    plugin_dir_url(WP_AI_AGENT_DIR . 'assets/build/') . $cssFile,
+                    plugins_url('assets/build/' . $cssFile, WP_AI_AGENT_DIR . 'wp-ai-page-builder.php'),
                     [],
                     WP_AI_AGENT_VERSION,
                 );

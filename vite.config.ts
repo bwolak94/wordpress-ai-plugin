@@ -23,4 +23,9 @@ export default defineConfig({
     port: 5173,
     cors: true,
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./assets/src/test/setup.ts'],
+  },
 });
