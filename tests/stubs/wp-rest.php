@@ -6,6 +6,12 @@ if (!defined('HOUR_IN_SECONDS')) {
 if (!defined('DAY_IN_SECONDS')) {
     define('DAY_IN_SECONDS', 86400);
 }
+if (!defined('WP_AI_AGENT_VERSION')) {
+    define('WP_AI_AGENT_VERSION', '1.0.0');
+}
+if (!defined('WP_AI_AGENT_DIR')) {
+    define('WP_AI_AGENT_DIR', dirname(__DIR__, 2) . '/');
+}
 
 if (!class_exists('WP_REST_Request')) {
     class WP_REST_Request

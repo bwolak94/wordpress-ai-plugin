@@ -1,3 +1,3 @@
 {
-    "redefinable-internals": ["sleep", "defined", "function_exists", "uniqid", "time"]
+    "redefinable-internals": ["sleep", "defined", "function_exists", "uniqid", "time", "file_exists", "file_get_contents", "error_log", "json_decode"]
 }

@@ -15,13 +15,13 @@ final class AdminPage
     public function addMenuPage(): void
     {
         add_menu_page(
-            page_title: 'AI Page Builder',
-            menu_title: 'AI Builder',
-            capability: 'edit_pages',
-            menu_slug: 'wp-ai-agent',
-            callback: [$this, 'renderRoot'],
-            icon_url: 'dashicons-superhero',
-            position: 25,
+            'AI Page Builder',
+            'AI Builder',
+            'edit_pages',
+            'wp-ai-agent',
+            [$this, 'renderRoot'],
+            'dashicons-superhero',
+            25,
         );
     }
 
