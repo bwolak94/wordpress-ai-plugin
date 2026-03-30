@@ -1,0 +1,28 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #8c8f94;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  background: #fff;
+}
+
+.hasError {
+  border-color: #d63638;
+}
+
+.error {
+  color: #d63638;
+  font-size: 0.75rem;
+}

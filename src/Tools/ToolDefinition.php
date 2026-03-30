@@ -40,4 +40,17 @@ final class ToolDefinition
             'input_schema' => $this->inputSchema,
         ];
     }
+
+    /** Export to OpenAI function calling format */
+    public function toOpenAIFormat(): array
+    {
+        return [
+            'type'     => 'function',
+            'function' => [
+                'name'        => $this->name,
+                'description' => $this->description,
+                'parameters'  => $this->inputSchema,
+            ],
+        ];
+    }
 }
