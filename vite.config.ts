@@ -27,5 +27,15 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./assets/src/test/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      include: ['assets/src/**/*.{ts,tsx}'],
+      exclude: [
+        'assets/src/test/**',
+        'assets/src/main.tsx',
+        'assets/src/types/**',
+        'assets/src/**/index.ts',
+      ],
+    },
   },
 });

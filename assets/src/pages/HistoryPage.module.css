@@ -1,5 +1,40 @@
-.page { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
-.title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-.table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-.table th, .table td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--color-border, #e5e7eb); }
-.state { padding: 2rem; color: var(--color-muted, #6b7280); }
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+.table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border2);
+}
+
+.table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.table code {
+  color: var(--accent2);
+  font-size: 11px;
+}
+
+.state {
+  color: var(--muted2);
+  font-size: 13px;
+}

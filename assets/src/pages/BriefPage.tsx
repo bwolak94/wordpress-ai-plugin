@@ -5,19 +5,17 @@ import styles from './BriefPage.module.css';
 
 export function BriefPage() {
   return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>AI Page Builder</h1>
+    <>
+      <div className={styles.header}>
+        <h1 className={styles.title}>New brief</h1>
         <p className={styles.subtitle}>
-          Give the agent your documentation and goals — it will create WordPress pages automatically.
+          Describe your documentation and goals — the agent will build the page.
         </p>
-      </header>
+      </div>
 
-      <main className={styles.main}>
-        <BriefForm />
-        <AgentLog />
-        <ResultsGrid />
-      </main>
-    </div>
+      <BriefForm />
+      <AgentLog />
+      <ResultsGrid />
+    </>
   );
 }

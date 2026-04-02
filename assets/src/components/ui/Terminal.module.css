@@ -1,82 +1,85 @@
 .terminal {
-  border-radius: 8px;
+  background: #080810;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #2d2d2d;
-  font-family: 'SF Mono', 'Consolas', 'Liberation Mono', monospace;
-  font-size: 0.8125rem;
 }
 
 .termBar {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  background: #2d2d2d;
+  gap: 8px;
 }
 
 .dot {
-  width: 0.75rem;
-  height: 0.75rem;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
 
 .label {
-  margin-left: 0.5rem;
-  color: #a1a1aa;
-  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 4px;
 }
 
 .body {
-  background: #1a1a1a;
-  color: #e4e4e7;
-  padding: 0.75rem;
-  max-height: 24rem;
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  min-height: 140px;
+  max-height: 200px;
   overflow-y: auto;
+  line-height: 1.7;
 }
 
 .line {
   display: flex;
-  gap: 0.75rem;
-  padding: 0.125rem 0;
-  line-height: 1.5;
+  gap: 12px;
+  align-items: flex-start;
 }
 
 .lineNum {
-  color: #52525b;
-  user-select: none;
+  color: var(--muted);
   flex-shrink: 0;
+  user-select: none;
 }
 
 .lineError {
-  color: #ef4444;
+  color: var(--red);
 }
 
 .lineOk {
-  color: #22c55e;
+  color: var(--green);
 }
 
 .lineWait {
-  color: #f59e0b;
+  color: var(--amber);
 }
 
 .lineTool {
-  color: #60a5fa;
+  color: var(--accent2);
 }
 
 .lineInfo {
-  color: #e4e4e7;
+  color: var(--muted2);
 }
 
 .cursor {
   display: inline-block;
-  width: 0.5rem;
-  height: 1rem;
-  background: #e4e4e7;
-  animation: blink 1s step-end infinite;
+  width: 8px;
+  height: 14px;
+  background: var(--accent2);
+  animation: blink 0.9s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

@@ -41,83 +41,88 @@ export function BriefForm() {
   const isRunning = state.status === 'running';
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
-      <Textarea
-        label="Product Documentation"
-        {...register('documentation')}
-        error={errors.documentation?.message}
-        placeholder="Paste your product documentation, feature list, or content brief…"
-        rows={7}
-        disabled={isRunning}
-      />
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className={styles.card}>
+          <div className={styles.cardTitle}>Brief</div>
+          <div className={styles.formGrid}>
+            <div className={styles.full}>
+              <Textarea
+                label="Documentation"
+                {...register('documentation')}
+                error={errors.documentation?.message}
+                placeholder="Paste your product documentation, feature descriptions, copy..."
+                rows={5}
+                disabled={isRunning}
+              />
+            </div>
+            <div className={styles.full}>
+              <Textarea
+                label="Goals"
+                {...register('goals')}
+                error={errors.goals?.message}
+                placeholder="What should this page achieve?"
+                rows={3}
+                disabled={isRunning}
+              />
+            </div>
+            <Select
+              label="ACF group"
+              {...register('acf_group_key')}
+              options={acfOptions ?? []}
+              loading={acfLoading}
+              error={errors.acf_group_key?.message}
+              disabled={isRunning}
+            />
+            <Select
+              label="Status"
+              {...register('status')}
+              options={[
+                { value: 'draft',   label: 'draft' },
+                { value: 'publish', label: 'publish' },
+              ]}
+              disabled={isRunning}
+            />
+            <Select
+              label="Model"
+              {...register('model')}
+              options={[
+                { value: 'claude-opus-4-5',   label: 'claude-opus-4-5' },
+                { value: 'claude-sonnet-4-6', label: 'claude-sonnet-4-6' },
+              ]}
+              disabled={isRunning}
+            />
+          </div>
+        </div>
 
-      <Textarea
-        label="Page Goals"
-        {...register('goals')}
-        error={errors.goals?.message}
-        placeholder="What should the agent create? e.g. 'Create an SEO landing page with hero, features, and CTA sections'"
-        rows={3}
-        disabled={isRunning}
-      />
-
-      <div className={styles.row}>
-        <Select
-          label="ACF Field Group"
-          {...register('acf_group_key')}
-          options={acfOptions ?? []}
-          loading={acfLoading}
-          error={errors.acf_group_key?.message}
-          disabled={isRunning}
-        />
-
-        <Select
-          label="Page Status"
-          {...register('status')}
-          options={[
-            { value: 'draft',   label: 'Draft' },
-            { value: 'publish', label: 'Publish immediately' },
-          ]}
-          disabled={isRunning}
-        />
-
-        <Select
-          label="AI Model"
-          {...register('model')}
-          options={[
-            { value: 'claude-opus-4-5',   label: 'Claude Opus 4.5 (best quality)' },
-            { value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6 (faster)' },
-          ]}
-          disabled={isRunning}
-        />
-      </div>
-
-      <div className={styles.actions}>
-        <Button
-          type="submit"
-          loading={isRunning}
-          disabled={isRunning}
-          icon="play"
-        >
-          {isRunning ? 'Running agent…' : 'Run Agent'}
-        </Button>
-
-        {(state.status === 'success' || state.status === 'error') && (
+        <div className={styles.actions} style={{ marginTop: 20 }}>
           <Button
-            type="button"
-            variant="secondary"
-            icon="reset"
-            onClick={() => { reset(); runAgent.reset(); }}
+            type="submit"
+            loading={isRunning}
+            disabled={isRunning}
+            icon="play"
           >
-            New run
+            {isRunning ? 'Running...' : 'Run agent'}
           </Button>
-        )}
-      </div>
 
-      {state.status === 'error' && state.error && (
-        <p className={styles.globalError} role="alert">
-          {state.error}
-        </p>
-      )}
-    </form>
+          {(state.status === 'success' || state.status === 'error') && (
+            <Button
+              type="button"
+              variant="secondary"
+              icon="reset"
+              onClick={() => { reset(); runAgent.reset(); }}
+            >
+              New run
+            </Button>
+          )}
+        </div>
+
+        {state.status === 'error' && state.error && (
+          <p className={styles.globalError} role="alert">
+            {state.error}
+          </p>
+        )}
+      </form>
+    </>
   );
 }

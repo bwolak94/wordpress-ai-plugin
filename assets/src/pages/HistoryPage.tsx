@@ -5,13 +5,13 @@ import styles from './HistoryPage.module.css';
 export function HistoryPage() {
   const { data: history, isLoading, error } = useAgentHistory();
 
-  if (isLoading) return <p className={styles.state}>Loading history…</p>;
+  if (isLoading) return <p className={styles.state}>Loading history...</p>;
   if (error)     return <p className={styles.state}>Failed to load history.</p>;
-  if (!history?.length) return <p className={styles.state}>No runs yet. Go to Run Agent to start.</p>;
+  if (!history?.length) return <p className={styles.state}>No runs yet. Go to New brief to start.</p>;
 
   return (
-    <div className={styles.page}>
-      <h1 className={styles.title}>Run History</h1>
+    <>
+      <h1 className={styles.title}>History</h1>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -38,6 +38,6 @@ export function HistoryPage() {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 }

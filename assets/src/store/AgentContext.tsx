@@ -7,7 +7,7 @@ interface AgentContextValue {
   dispatch: React.Dispatch<AgentAction>;
 }
 
-const AgentContext = createContext<AgentContextValue | null>(null);
+export const AgentContext = createContext<AgentContextValue | null>(null);
 
 export function AgentProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(agentReducer, initialState);

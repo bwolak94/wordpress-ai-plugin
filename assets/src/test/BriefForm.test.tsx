@@ -27,7 +27,7 @@ describe('BriefForm', () => {
   it('shows validation error when goals is empty', async () => {
     render(<BriefForm />, { wrapper: Wrapper });
 
-    await userEvent.type(screen.getByLabelText(/product documentation/i), 'Some long documentation text here');
+    await userEvent.type(screen.getByLabelText(/documentation/i), 'Some long documentation text here');
 
     fireEvent.click(screen.getByRole('button', { name: /run agent/i }));
 
@@ -39,13 +39,13 @@ describe('BriefForm', () => {
   it('disables submit button while running', async () => {
     render(<BriefForm />, { wrapper: Wrapper });
 
-    await userEvent.type(screen.getByLabelText(/product documentation/i), 'Documentation with enough content here');
-    await userEvent.type(screen.getByLabelText(/page goals/i), 'Create a landing page');
+    await userEvent.type(screen.getByLabelText(/documentation/i), 'Documentation with enough content here');
+    await userEvent.type(screen.getByLabelText(/goals/i), 'Create a landing page');
 
     fireEvent.click(screen.getByRole('button', { name: /run agent/i }));
 
     await waitFor(() => {
-      const button = screen.getByRole('button', { name: /running agent/i });
+      const button = screen.getByRole('button', { name: /running/i });
       expect(button).toBeDisabled();
     });
   });
@@ -54,14 +54,14 @@ describe('BriefForm', () => {
     render(<BriefForm />, { wrapper: Wrapper });
 
     await waitFor(() => {
-      expect(screen.getByLabelText(/acf field group/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/acf group/i)).toBeInTheDocument();
     });
   });
 
   it('renders model and status selects', () => {
     render(<BriefForm />, { wrapper: Wrapper });
 
-    expect(screen.getByLabelText(/ai model/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/page status/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/model/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/status/i)).toBeInTheDocument();
   });
 });

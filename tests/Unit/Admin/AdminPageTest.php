@@ -145,7 +145,9 @@ final class AdminPageTest extends TestCase
             }
         );
 
-        Functions\when('plugin_dir_url')->justReturn('https://example.com/wp-content/plugins/wp-ai-agent/assets/build/');
+        Functions\when('plugins_url')->alias(function (string $path): string {
+            return 'https://example.com/wp-content/plugins/wp-ai-agent/' . $path;
+        });
         Functions\when('wp_create_nonce')->justReturn('nonce');
         Functions\when('rest_url')->justReturn('/wp-json/');
         Functions\when('admin_url')->justReturn('/wp-admin/');
