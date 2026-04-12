@@ -2,6 +2,5 @@ services:
   wordpress:
     environment:
       WORDPRESS_DEBUG: "1"
-    # Uncomment to use a local PHP config
-    # volumes:
-    #   - ./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    volumes:
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini
